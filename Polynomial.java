@@ -34,7 +34,7 @@ class Polynomial{
         return sum;
     }
     public boolean hasRoot(double xVal){
-        if (Math.abs(this.evaluate(xVal)) < 0.00001) return true;
+        if (Math.abs(this.evaluate(xVal)) < 0.000000000001) return true;
         return false;
     }
 }
