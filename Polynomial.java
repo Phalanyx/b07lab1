@@ -1,4 +1,3 @@
-import java.lang.Math;
 class Polynomial{
     double[] terms;
     public Polynomial(){
