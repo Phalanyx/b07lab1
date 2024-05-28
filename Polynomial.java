@@ -61,7 +61,6 @@ class Polynomial{
         }
         line = line.replace("+-", "-");
         writer.write(line.substring(0, line.length()-1));
-
         writer.close();
         }
         catch (IOException e){
