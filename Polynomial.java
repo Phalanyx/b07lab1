@@ -22,11 +22,12 @@ class Polynomial{
         Scanner sc = new Scanner(text);
         String line = sc.nextLine();
         String[] parts = line.split("(?=\\+)|(?=-)");
+        System.out.println(parts.length);
         coefficients = new double[parts.length];
         powers = new int[parts.length];
         String[] tmp = new String[2];
         for (int i = 0; i < parts.length; i++){
-            if (parts[i].length() == 1){
+            if (!parts[i].contains("x")){
                 coefficients[i] = Double.parseDouble(parts[i]);
                 powers[i] = 0; 
             }
@@ -155,7 +156,7 @@ class Polynomial{
                 product.coefficients[p1.powers[j] + p2.powers[i]] += p1.coefficients[j] * p2.coefficients[i];
                 }
             }
-        return this.toNewPoly(product);
+        return product.toNewPoly(product);
         }
     }
 
