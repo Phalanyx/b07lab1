@@ -26,9 +26,12 @@ public static void main(String [] args) {
         System.out.println("1 is not a root of s");
     File f = new File("data.txt");
     Polynomial p3 = new Polynomial(f);
-    for (int i = 0; i < p3.getLength(); i++){
-        System.out.println("Coefficient: " + p3.coefficients[i] + " Power: " + p3.powers[i]);
+    int [] nums2 = {0,2,8};
+    double [] nums1 = {-5,3,-7};
+    Polynomial p4 = new Polynomial(nums1,nums2);
+    p4 = p4.add(p3);
+    for (int i = 0; i < p4.getLength(); i++){
+        System.out.println("Coefficient: " + p4.coefficients[i] + " Power: " + p4.powers[i]);
     }
-    p3.saveToFile("output.txt");
-}
+    p3.saveToFile("output.txt");}
 }

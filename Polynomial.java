@@ -30,13 +30,11 @@ class Polynomial{
             if (parts[i].length() == 1){
                 coefficients[i] = Double.parseDouble(parts[i]);
                 powers[i] = 0; 
-                System.out.println(coefficients[i] + " " + powers[i]);               
             }
             else{
                 tmp = parts[i].split("x");
                 coefficients[i] = Double.parseDouble(tmp[0]);
                 powers[i] = Integer.parseInt(tmp[1]);
-                System.out.println(coefficients[i] + " " + powers[i]);
             }
         }
         sc.close();
@@ -70,18 +68,16 @@ class Polynomial{
     public int getLength(){
         return coefficients.length;
     }
-    public int comPow(Polynomial poly){
-        int count = 0;
-        for (int i = 0; i < this.powers.length; i++){
-            for (int j = 0; j < poly.powers.length; j++){
-                if (this.powers[i] == poly.powers[j]) count++;
+
+    public Polynomial toOldPoly (Polynomial poly){
+        int max = 0;
+        for (int i = 0; i < poly.powers.length; i++){
+            if (poly.powers[i] > max){
+                max = poly.powers[i];
             }
         }
-        return count;
-    }
-    public Polynomial toOldPoly (Polynomial poly){
-        double coeff[] = new double[poly.powers[poly.powers.length-1]+1];
-        int[] power = new int[poly.powers[poly.powers.length-1]+1];
+        double coeff[] = new double[max+1];
+        int[] power = new int[max+1];
         Polynomial old = new Polynomial(coeff, power);
         int idx = 0;
         for (int i = 0; i < poly.powers.length; i++){
@@ -123,8 +119,9 @@ class Polynomial{
         Polynomial p2 = this.toOldPoly(poly);
         if (p1.coefficients.length > p2.getLength()){
             for (int i = 0; i < p2.getLength(); i++){
-                p2.coefficients[i] += p1.coefficients[i];
+                p1.coefficients[i] += p2.coefficients[i];
             }
+            return p1.toNewPoly(p1);
         }
         else{
             for (int i = 0; i < p1.coefficients.length; i++){
@@ -136,7 +133,7 @@ class Polynomial{
     public double evaluate(double xVal){
         double value = 0.0;
         for (int i = 0; i < coefficients.length; i++){
-            value+= Math.pow(coefficients[i], powers[i]);
+            value+= coefficients[i] * Math.pow(xVal, powers[i]);
         }
         return value;
     }
